@@ -6,8 +6,9 @@ import styles from './PhotoCardStyle';
 export default function PhotoCard(props) {
   return (
     <View>
-      <TouchableOpacity style={styles.container}>
+      <TouchableOpacity onPress={props.press} style={styles.container}>
         <AutoHeightImage
+          style={styles.image}
           width={styles.image.width}
           source={{uri: props.source}}
         />

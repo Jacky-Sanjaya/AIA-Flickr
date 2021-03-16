@@ -7,15 +7,16 @@ import {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    alignItems: 'center',
   },
   header: {
     alignItems: 'center',
     margin: responsiveWidth(5),
     paddingHorizontal: responsiveWidth(2),
-    flexDirection: 'collumn',
-    backgroundColor: 'gray',
+    flexDirection: 'row',
+    backgroundColor: '#40394a',
     borderRadius: 20,
+    opacity: 0.8,
   },
   textInput: {
     width: responsiveWidth(75),

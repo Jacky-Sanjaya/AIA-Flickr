@@ -6,9 +6,11 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
+  ImageBackground,
 } from 'react-native';
 import axios from 'axios';
 import PhotoCard from '.././../component/photoCard/PhotoCard';
+import {useNavigation} from '@react-navigation/native';
 
 import styles from './SearchScreenStyle';
 
@@ -16,6 +18,8 @@ export default function SearchScreen() {
   const [image, setImage] = useState('');
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
+
+  const navigation = useNavigation();
 
   const handleSearch = async () => {
     try {
@@ -69,19 +73,23 @@ export default function SearchScreen() {
       if (!url) {
         null;
       }
-      return <PhotoCard text={item.title} source={url} />;
+      return (
+        <PhotoCard
+          press={() => navigation.navigate('WebViewScreen', {url: url})}
+          text={item.title}
+          source={url}
+        />
+      );
     };
     return (
-      <View style={{alignItems: 'center'}}>
-        <FlatList
-          data={image}
-          renderItem={renderItem}
-          key={index}
-          keyExtractor={(item = () => `${item._id}`)}
-          onEndReached={() => handlePage()}
-          onEndReachedThreshold={5000}
-        />
-      </View>
+      <FlatList
+        data={image}
+        renderItem={renderItem}
+        key={index}
+        keyExtractor={(item = () => `${item._id}`)}
+        onEndReached={() => handlePage()}
+        onEndReachedThreshold={5000}
+      />
     );
   }
 
@@ -90,8 +98,12 @@ export default function SearchScreen() {
   }, [page, image]);
   return (
     <View style={styles.container}>
-      {renderHeader()}
-      {renderMain()}
+      <ImageBackground
+        style={styles.container}
+        source={require('../../assets/backgroundImage.png')}>
+        {renderHeader()}
+        {renderMain()}
+      </ImageBackground>
     </View>
   );
 }

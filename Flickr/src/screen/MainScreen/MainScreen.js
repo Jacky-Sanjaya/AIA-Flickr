@@ -1,15 +1,24 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, FlatList, ActivityIndicator} from 'react-native';
+import {
+  View,
+  Text,
+  FlatList,
+  ActivityIndicator,
+  Image,
+  ImageBackground,
+} from 'react-native';
 import axios from 'axios';
 import PhotoCard from '../../component/photoCard/PhotoCard';
+import {useNavigation} from '@react-navigation/native';
 
 import styles from './MainScreenStyle';
-// let url = `http://farm${farmid}.staticflickr.com/${serverId}/${photoId}_${secretId}.jpg`;
 
 export default function MainScreen() {
   const [recentImage, setRecentImage] = useState('');
   const [page, setPage] = useState(1);
   const [footerLoading, setFooterLoading] = useState(true);
+
+  const navigation = useNavigation();
 
   const handleRecentImage = async () => {
     try {
@@ -45,7 +54,11 @@ export default function MainScreen() {
   function renderHeader() {
     return (
       <View style={styles.header}>
-        <Text>Flickr</Text>
+        <Image
+          resizeMode="contain"
+          style={styles.logo}
+          source={require('../../assets/flickr.png')}
+        />
       </View>
     );
   }
@@ -56,10 +69,19 @@ export default function MainScreen() {
       if (!url) {
         null;
       }
-      return <PhotoCard text={item.title} source={url} />;
+      return (
+        <PhotoCard
+          press={() => navigation.navigate('WebViewScreen', {url: url})}
+          text={item.title}
+          source={url}
+        />
+      );
     };
     return (
-      <View style={styles.main}>
+      <ImageBackground
+        resizeMode="cover"
+        source={require('../../assets/backgroundImage.png')}
+        style={styles.main}>
         <FlatList
           data={recentImage}
           renderItem={renderItem}
@@ -69,7 +91,7 @@ export default function MainScreen() {
           // onEndReachedThreshold={5000}
           // ListFooterComponent={() => renderFooterLoading()}
         />
-      </View>
+      </ImageBackground>
     );
   }
 
