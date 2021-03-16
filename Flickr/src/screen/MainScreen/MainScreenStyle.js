@@ -14,8 +14,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#aaaa',
   },
   main: {
-    flex: 1,
-    flexDirection: 'row',
+    alignItems: 'center',
   },
 });
 

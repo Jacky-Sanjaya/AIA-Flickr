@@ -11,6 +11,11 @@ export default function PhotoCard(props) {
           width={styles.image.width}
           source={{uri: props.source}}
         />
+        <View style={styles.desc}>
+          <Text numberOfLines={1} style={styles.text}>
+            {props.text}
+          </Text>
+        </View>
       </TouchableOpacity>
     </View>
   );
