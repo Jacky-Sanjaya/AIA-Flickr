@@ -16,6 +16,7 @@ import styles from './MainScreenStyle';
 export default function MainScreen() {
   const [recentImage, setRecentImage] = useState([]);
   const [page, setPage] = useState(1);
+  const [refresh, setRefresh] = useState(false);
   const [loading, setLoading] = useState(true);
   const [footerLoading, setFooterLoading] = useState(true);
 
@@ -64,7 +65,9 @@ export default function MainScreen() {
       </View>
     );
   }
-
+  const handleRefresh = () => {
+    navigation.replace('BottomTabNavigator');
+  };
   function renderMain() {
     const renderItem = ({item}) => {
       const url = `http://farm${item.farm}.staticflickr.com/${item.server}/${item.id}_${item.secret}.jpg`;
@@ -92,6 +95,8 @@ export default function MainScreen() {
           keyExtractor={(item, index) => index.toString()}
           onEndReached={() => hanldePage()}
           onEndReachedThreshold={0}
+          refreshing={refresh}
+          onRefresh={() => handleRefresh()}
           ListFooterComponent={() => renderFooterLoading()}
         />
       </ImageBackground>
