@@ -14,8 +14,9 @@ import {useNavigation} from '@react-navigation/native';
 import styles from './MainScreenStyle';
 
 export default function MainScreen() {
-  const [recentImage, setRecentImage] = useState('');
+  const [recentImage, setRecentImage] = useState([]);
   const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(true);
   const [footerLoading, setFooterLoading] = useState(true);
 
   const navigation = useNavigation();
@@ -23,10 +24,11 @@ export default function MainScreen() {
   const handleRecentImage = async () => {
     try {
       const response = await axios.get(
-        `https://www.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=092f751d7bce9ac87bafb1018a0b3737&per_page=10&format=json&nojsoncallback=1`,
+        `https://www.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=092f751d7bce9ac87bafb1018a0b3737&per_page=10&page=${page}&format=json&nojsoncallback=1`,
       );
-
-      setRecentImage([...recentImage, ...response.data.photos.photo]);
+      const data = recentImage.concat(response.data.photos.photo);
+      setRecentImage(data);
+      setLoading(false);
       setFooterLoading(false);
     } catch (error) {
       console.error(error);
@@ -77,7 +79,11 @@ export default function MainScreen() {
         />
       );
     };
-    return (
+    return loading ? (
+      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+        <ActivityIndicator size="large" color="#1A3150" />
+      </View>
+    ) : (
       <ImageBackground
         resizeMode="cover"
         source={require('../../assets/backgroundImage.png')}
@@ -86,10 +92,10 @@ export default function MainScreen() {
           data={recentImage}
           renderItem={renderItem}
           key={index}
-          keyExtractor={(item = () => `${item._id}`)}
-          // onEndReached={() => hanldePage()}
-          // onEndReachedThreshold={5000}
-          // ListFooterComponent={() => renderFooterLoading()}
+          keyExtractor={(item, index) => index.toString()}
+          onEndReached={() => hanldePage()}
+          onEndReachedThreshold={0}
+          ListFooterComponent={() => renderFooterLoading()}
         />
       </ImageBackground>
     );
@@ -97,6 +103,7 @@ export default function MainScreen() {
 
   useEffect(() => {
     handleRecentImage();
+    console.log('test');
   }, [page]);
 
   return (
