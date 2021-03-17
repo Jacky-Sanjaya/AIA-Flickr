@@ -13,14 +13,25 @@ const styles = StyleSheet.create({
   header: {
     height: responsiveHeight(7),
     backgroundColor: '#40394a',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     flexDirection: 'row',
     alignItems: 'center',
   },
   logo: {
     width: responsiveWidth(20),
     height: responsiveHeight(7),
-    alignSelf: 'center',
+    marginRight: responsiveWidth(40),
+  },
+  arrowContainer: {
+    width: responsiveWidth(12),
+    height: responsiveHeight(4),
+    marginLeft: responsiveWidth(5),
+  },
+  arrow: {
+    width: responsiveWidth(12),
+    height: responsiveHeight(4),
+    tintColor: '#DF6E57',
+    transform: [{scaleX: -1}],
   },
   textContainer: {
     flexDirection: 'row',
@@ -30,8 +41,19 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: responsiveFontSize(3),
-    marginRight: responsiveWidth(5),
+    marginRight: responsiveWidth(3),
     fontFamily: 'SourceSansPro-Bold',
+  },
+  bookmarkContainer: {
+    alignItems: 'center',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    marginTop: responsiveHeight(5),
+  },
+  bookmark: {
+    width: responsiveWidth(20),
+    height: responsiveHeight(7),
+    marginTop: responsiveHeight(5),
   },
   main: {
     flex: 1,

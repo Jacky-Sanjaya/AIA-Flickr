@@ -1,16 +1,25 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, Image, ImageBackground, FlatList} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  ImageBackground,
+  FlatList,
+  TouchableOpacity,
+} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import PhotoCard from '../../component/photoCard/PhotoCard';
 import ModalPop from '../../component/modalPop/ModalPop';
+import {useNavigation} from '@react-navigation/native';
 
 import styles from './FavoriteScreenStyle';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 
 export default function FavoriteScreen() {
   const [favorite, setFavorite] = useState('');
   const [trigger, setTrigger] = useState('trigger');
   const [modalVisible, setModalVisible] = useState(false);
+
+  const navigation = useNavigation();
 
   const getFavorite = async () => {
     await AsyncStorage.getItem('favorite')
@@ -27,6 +36,15 @@ export default function FavoriteScreen() {
   function renderHeader() {
     return (
       <View style={styles.header}>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={styles.arrowContainer}>
+          <Image
+            style={styles.arrow}
+            resizeMode="contain"
+            source={require('../../assets/arrow.png')}
+          />
+        </TouchableOpacity>
         <Image
           resizeMode="contain"
           style={styles.logo}
@@ -49,12 +67,32 @@ export default function FavoriteScreen() {
     const renderItem = ({item}) => {
       return (
         <PhotoCard
+          press={() =>
+            navigation.navigate('WebViewScreen', {
+              url: item.url,
+              desc: item.desc,
+            })
+          }
           text={item.desc == '' ? 'no desc.' : item.desc}
           source={item.url}
         />
       );
     };
-    return (
+    return favorite == null ? (
+      <ImageBackground
+        resizeMode="cover"
+        source={require('../../assets/backgroundImage.png')}
+        style={styles.main}>
+        <View style={styles.bookmarkContainer}>
+          <Text style={styles.text}>Get your's one!</Text>
+          <Image
+            resizeMode="contain"
+            style={styles.bookmark}
+            source={require('../../assets/bookmark.png')}
+          />
+        </View>
+      </ImageBackground>
+    ) : (
       <ImageBackground
         resizeMode="cover"
         source={require('../../assets/backgroundImage.png')}

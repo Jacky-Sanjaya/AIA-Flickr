@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: responsiveScreenFontSize(2.5),
+    color: '#bbbb',
     fontFamily: 'SourceSansPro-Black',
   },
   love: {
