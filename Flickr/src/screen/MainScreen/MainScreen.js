@@ -6,6 +6,7 @@ import {
   ActivityIndicator,
   Image,
   ImageBackground,
+  TouchableOpacity,
 } from 'react-native';
 import axios from 'axios';
 import PhotoCard from '../../component/photoCard/PhotoCard';
@@ -62,6 +63,15 @@ export default function MainScreen() {
           style={styles.logo}
           source={require('../../assets/flickr.png')}
         />
+        <TouchableOpacity
+          style={styles.favoriteContainer}
+          onPress={() => navigation.navigate('FavoriteScreen')}>
+          <Image
+            resizeMode="contain"
+            style={styles.favorite}
+            source={require('../../assets/favorite.png')}
+          />
+        </TouchableOpacity>
       </View>
     );
   }
@@ -74,8 +84,10 @@ export default function MainScreen() {
 
       return (
         <PhotoCard
-          press={() => navigation.navigate('WebViewScreen', {url: url})}
-          text={item.title}
+          press={() =>
+            navigation.navigate('WebViewScreen', {url: url, desc: item.title})
+          }
+          text={item.title == '' ? 'no desc.' : item.title}
           source={url}
         />
       );

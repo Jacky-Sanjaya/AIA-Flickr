@@ -1,5 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {
+  responsiveFontSize,
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
@@ -19,19 +20,30 @@ const styles = StyleSheet.create({
   logo: {
     width: responsiveWidth(20),
     height: responsiveHeight(7),
-    left: responsiveWidth(7.5),
     alignSelf: 'center',
   },
-  favoriteContainer: {
-    left: responsiveWidth(30),
+  textContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginVertical: responsiveHeight(2),
   },
-  favorite: {
-    width: responsiveWidth(16),
-    height: responsiveHeight(4),
-    transform: [{scaleX: -1}],
+  text: {
+    fontSize: responsiveFontSize(3),
+    marginRight: responsiveWidth(5),
+    fontFamily: 'SourceSansPro-Bold',
   },
   main: {
+    flex: 1,
     alignItems: 'center',
+  },
+  recycleContainer: {
+    width: responsiveWidth(10),
+    height: responsiveHeight(4),
+  },
+  recycle: {
+    width: responsiveWidth(10),
+    height: responsiveHeight(4),
   },
 });
 

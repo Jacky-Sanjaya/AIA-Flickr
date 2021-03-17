@@ -4,6 +4,7 @@ import SplashScreen from '../../screen/splashScreen/SplashScreen';
 import MainScreen from '../../screen/MainScreen/MainScreen';
 import BottomTabNavigator from '../../route/bottomTabNavigator/BottomTabNavigator';
 import WebViewScreen from '../../screen/webView/WebViewScreen';
+import FavoriteScreen from '../../screen/favoriteScreen/FavoriteScreen';
 
 const Stack = createStackNavigator();
 export default function StackNavigator() {
@@ -12,6 +13,7 @@ export default function StackNavigator() {
       {/* <Stack.Screen name="SplashScreen" component={SplashScreen} /> */}
       <Stack.Screen name="BottomTabNavigator" component={BottomTabNavigator} />
       <Stack.Screen name="WebViewScreen" component={WebViewScreen} />
+      <Stack.Screen name="FavoriteScreen" component={FavoriteScreen} />
     </Stack.Navigator>
   );
 }

@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
   text: {
     backgroundColor: 'transparent',
     fontSize: responsiveFontSize(2),
+    fontFamily: 'SourceSansPro-Black',
     color: '#bbbbbb',
   },
 });
