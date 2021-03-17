@@ -10,7 +10,7 @@ const Stack = createStackNavigator();
 export default function StackNavigator() {
   return (
     <Stack.Navigator headerMode="none">
-      {/* <Stack.Screen name="SplashScreen" component={SplashScreen} /> */}
+      <Stack.Screen name="SplashScreen" component={SplashScreen} />
       <Stack.Screen name="BottomTabNavigator" component={BottomTabNavigator} />
       <Stack.Screen name="WebViewScreen" component={WebViewScreen} />
       <Stack.Screen name="FavoriteScreen" component={FavoriteScreen} />
