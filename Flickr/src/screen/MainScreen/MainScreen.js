@@ -65,12 +65,10 @@ export default function MainScreen() {
     );
   }
 
-  function renderMain(item, index) {
+  function renderMain() {
     const renderItem = ({item}) => {
       const url = `http://farm${item.farm}.staticflickr.com/${item.server}/${item.id}_${item.secret}.jpg`;
-      if (!url) {
-        null;
-      }
+
       return (
         <PhotoCard
           press={() => navigation.navigate('WebViewScreen', {url: url})}
@@ -91,7 +89,6 @@ export default function MainScreen() {
         <FlatList
           data={recentImage}
           renderItem={renderItem}
-          key={index}
           keyExtractor={(item, index) => index.toString()}
           onEndReached={() => hanldePage()}
           onEndReachedThreshold={0}

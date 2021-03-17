@@ -70,9 +70,6 @@ export default function SearchScreen() {
   function renderMain(item, index) {
     const renderItem = ({item}) => {
       const url = `http://farm${item.farm}.staticflickr.com/${item.server}/${item.id}_${item.secret}.jpg`;
-      if (!url) {
-        null;
-      }
       return (
         <PhotoCard
           press={() => navigation.navigate('WebViewScreen', {url: url})}
@@ -86,16 +83,16 @@ export default function SearchScreen() {
         data={image}
         renderItem={renderItem}
         key={index}
-        keyExtractor={(item = () => `${item._id}`)}
+        keyExtractor={(item, index) => index.toString()}
         onEndReached={() => handlePage()}
-        onEndReachedThreshold={5000}
+        onEndReachedThreshold={1}
       />
     );
   }
 
   useEffect(() => {
     handleSearch();
-  }, [page, image]);
+  }, [page]);
   return (
     <View style={styles.container}>
       <ImageBackground
