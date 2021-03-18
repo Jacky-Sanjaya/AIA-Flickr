@@ -30,7 +30,6 @@ export default function WebViewScreen(props) {
       .catch(e => {
         throw e;
       });
-    console.log('test', list);
     let item = {
       url: url,
       desc: desc,
@@ -43,7 +42,6 @@ export default function WebViewScreen(props) {
     setUrl('');
     setDesc('');
     await AsyncStorage.setItem('favorite', JSON.stringify(list));
-    console.log(`ini isi list`, list);
   };
 
   const showLoader = () => {

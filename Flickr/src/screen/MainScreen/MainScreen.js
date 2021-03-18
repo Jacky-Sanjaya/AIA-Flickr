@@ -40,7 +40,6 @@ export default function MainScreen() {
   const hanldePage = async () => {
     setFooterLoading(true);
     setPage(page + 1);
-    console.log('page', page);
   };
 
   const renderFooterLoading = () => {
@@ -117,7 +116,6 @@ export default function MainScreen() {
 
   useEffect(() => {
     handleRecentImage();
-    console.log('test');
   }, [page]);
 
   return (
