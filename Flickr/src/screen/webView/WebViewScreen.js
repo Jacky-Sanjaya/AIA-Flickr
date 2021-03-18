@@ -4,6 +4,7 @@ import {
   View,
   Text,
   Image,
+  Linking,
   TouchableOpacity,
   ToastAndroid,
 } from 'react-native';
@@ -43,7 +44,9 @@ export default function WebViewScreen(props) {
     setDesc('');
     await AsyncStorage.setItem('favorite', JSON.stringify(list));
   };
-
+  const directingToLink = () => {
+    Linking.openURL(props.route.params.url);
+  };
   const showLoader = () => {
     setIsVisible(true);
   };
@@ -71,11 +74,13 @@ export default function WebViewScreen(props) {
         />
       ) : null}
       <View style={styles.header}>
-        <Image
-          resizeMode="contain"
-          style={styles.logo}
-          source={require('../../assets/flickr.png')}
-        />
+        <TouchableOpacity onPress={() => directingToLink()}>
+          <Image
+            resizeMode="contain"
+            style={styles.logo}
+            source={require('../../assets/flickr.png')}
+          />
+        </TouchableOpacity>
         <TouchableOpacity
           style={{flexDirection: 'row', alignItems: 'center'}}
           onPress={() => setModalVisible(true)}>
