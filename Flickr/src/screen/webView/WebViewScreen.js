@@ -5,6 +5,7 @@ import {
   Text,
   Image,
   TouchableOpacity,
+  ToastAndroid,
 } from 'react-native';
 import ModalPop from '../../component/modalPop/ModalPop';
 import uuid from 'react-native-uuid';
@@ -18,6 +19,10 @@ export default function WebViewScreen(props) {
   const [isVisible, setIsVisible] = useState(false);
   const [url, setUrl] = useState('');
   const [desc, setDesc] = useState('');
+
+  const toast = () => {
+    ToastAndroid.show('Saved to favorite !', ToastAndroid.SHORT);
+  };
 
   const addFavorite = async () => {
     let list = await AsyncStorage.getItem('favorite')
@@ -95,6 +100,7 @@ export default function WebViewScreen(props) {
       <ModalPop
         yes={() => {
           addFavorite();
+          toast();
           hideModal();
         }}
         no={() => hideModal()}
