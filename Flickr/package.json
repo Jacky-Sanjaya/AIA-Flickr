@@ -17,8 +17,13 @@
     "@react-navigation/stack": "^5.14.3",
     "axios": "^0.21.1",
     "buffer": "^6.0.3",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.6",
+    "jest-environment-enzyme": "^7.1.2",
+    "jest-enzyme": "^7.1.2",
     "lottie-react-native": "^3.5.0",
     "react": "17.0.1",
+    "react-dom": "^17.0.1",
     "react-native": "0.64.0",
     "react-native-auto-height-image": "^3.2.4",
     "react-native-gesture-handler": "^1.10.3",
@@ -33,6 +38,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.13.10",
+    "@babel/preset-env": "^7.13.10",
     "@babel/runtime": "^7.13.10",
     "@react-native-community/eslint-config": "^2.0.0",
     "babel-jest": "^26.6.3",
@@ -42,6 +48,14 @@
     "react-test-renderer": "17.0.1"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "collectCoverage": true,
+    "setupFilesAfterEnv": [
+      "jest-enzyme"
+    ],
+    "testEnvironment": "enzyme",
+    "testEnvironmentOptions": {
+      "enzymeAdapter": "react16"
+    }
   }
 }
